@@ -39,7 +39,7 @@ public class FrameCanvas extends JPanel {
         }
     }
 
-    public void startGame() {
+    public void nextGen() {
         final boolean[][] newGridDeGrid = new boolean[grid.width][grid.height];
 
         for (int i = 0; i < grid.width; i++) {

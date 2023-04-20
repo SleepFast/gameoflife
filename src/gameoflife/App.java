@@ -36,16 +36,20 @@ public class App {
         window.add(monCanevas, BorderLayout.WEST);
         window.add(menu, BorderLayout.EAST);
         window.pack();
+
+        StartGame(monCanevas);
     }
 
     public static void StartGame(FrameCanvas monCanevas) {
-        while (StopButton.getMaVariable()) {
-            monCanevas.startGame();
+        while (true) {
+            if(StopButton.getMaVariable() == false) {
+                monCanevas.nextGen();
+            };
             
             try {
                 Thread.sleep(60);
-            } catch (Exception e) {
-               System.exit(0);
+            } catch (InterruptedException e) {
+               break;
             }
         }
     }
