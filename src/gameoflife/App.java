@@ -1,32 +1,51 @@
 package gameoflife;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import gameoflife.ui.FrameCanvas;
+import gameoflife.ui.StopButton;
+import gameoflife.ui.Window;
 
 public class App {
     public static void main(String[] args) {
-        JFrame maFenetre = new JFrame();
-        maFenetre.setVisible(true);
-        maFenetre.setSize(400, 400);
-        maFenetre.setResizable(false);
+        Window window = new Window("Game of life");
         
-        Dimension dimensionCanvas = new Dimension(800, 800);
+        Dimension dimensionCanvas = new Dimension(600, 600);
         Dimension slot = new Dimension(10, 10);
         
-        Grid maGridDeGrid = new Grid(80, 80);
+        Grid maGridDeGrid = new Grid(60, 60);
         FrameCanvas monCanevas = new FrameCanvas(dimensionCanvas, slot, maGridDeGrid);
         
-        maFenetre.add(monCanevas);
-        maFenetre.pack();
+        JPanel menu = new JPanel();
+        menu.setPreferredSize(new Dimension(100, 40));
+        menu.setBackground(Color.ORANGE);
+        menu.setOpaque(true);
 
-        for(;;) {
+        StopButton b=new StopButton("pouet", monCanevas);  
+        b.setBounds(0, 0, 0, 0);  
+        b.setSize(10, 10);
+        b.setBackground(Color.BLACK);
+        b.setOpaque(true);
+
+        menu.add(b);
+
+        window.add(monCanevas, BorderLayout.WEST);
+        window.add(menu, BorderLayout.EAST);
+        window.pack();
+    }
+
+    public static void StartGame(FrameCanvas monCanevas) {
+        while (StopButton.getMaVariable()) {
             monCanevas.startGame();
-
+            
             try {
                 Thread.sleep(60);
             } catch (Exception e) {
-                break;
+               System.exit(0);
             }
         }
     }

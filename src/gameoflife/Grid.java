@@ -1,7 +1,8 @@
 package gameoflife;
 
 public class Grid {
-    int width, height;
+    public int width;
+    public int height;
     public boolean[][] grid;
 
     public Grid(int width, int height) {
@@ -11,7 +12,7 @@ public class Grid {
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                grid[i][j] = Math.random() <= .1;
+                grid[i][j] = Math.random() <= .3;
             }
         }
     }
